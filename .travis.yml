@@ -1,0 +1,19 @@
+language: python
+python:
+- '3.5'
+install:
+- sudo apt-get install pandoc
+script:
+- pandoc -o README.rst README.md
+- python setup.py sdist
+- python setup.py install -nc
+deploy:
+  skip_cleanup: true
+  provider: pypi
+  user: crichon
+  distributions: sdist bdist_wheel
+  password:
+    secure: Vhx2laue0Klh9gw/4S0IEC5G+hIAmXwFgnjtSMSQA5ZpoVpqzgpeH/s6NZlch8DKcy0m38B15sbQh3QV718pkuftTpMC8PoS2QB+D7dBVPI9wOy5V+y/5TBIyUdo+XRAzqoK4Oby1JiVkaxMTI19RQTuOxHGqDqcjIjTG2Ns7V6UDC+rWGEJSFdoFhrkrL3Xf7Cq8Ae9PaYZCP1lBsSVod2iqCyUp8jbF/KB+afOoFGKUBU+MUocFdmH3lc1WPqwhL48X5PDEoZJ8JF2zECDFNP6u9u6DAMtbLN9G3paQWV3vFsT/ft0GcTQzu3wQj3rX/cwfeJpkJRnHQVO4+dmH5mjvKorIQ/OJwje1HgbCRNx6RUiqPIY81q9Zod1LqG7eB2/yICo/xzIrhZwJtCcA5CSDYSsb4nu3QnEEUsUeE+YrIQnuArlVRhP8/poRNrv32tQc8/J/Exw+Bxo1u9287R3vaZnZinAtjruMIF2Yec0RYFKBnyZadhDcML8qUSXAOp04PsStKXWqDVkT2hcmBnevpFPiLvfXxV4WD2+fLToG7bWfjRvVqpPbnSImzteMfutNMkFpsATwN2d0Wf01l1KdgccNoLMAusS4nqNZCLLQ6vFRL/0a05Cw72q7o+ehGBeceXZJD19XcCK6O9h97ihDpHwrvke5cpMZ6Wu0EE=
+  on:
+    tags: true
+    repo: crichon/xdgmenu
