@@ -1,22 +1,23 @@
-sudo: false
-addons:
-  apt:
-    packages:
-    - pandoc
 language: python
+
 python:
-- '3.5'
-install: true
+  - '3.5'
+
+install:
+  - sudo apt-get install pandoc
+
 script:
-- pandoc -o README.rst README.md
-- python setup.py sdist
-- python setup.py install -nc
+  - pandoc -o README.rst README.md
+  - python setup.py sdist
+  - python setup.py install -nc
+
 deploy:
   provider: pypi
+  skip_cleanup: true
   user: crichon
+  server: https://testpypi.python.org/pypi
   password:
     secure: NwI5oEWKJRCUJXXs3kj/1ZZJtvq3dpn0uDBcj7L1TWlA2aBPf7qlAcNBna3sLyUyeD/QHjf5TqVRo7XXLF9qqDzTcUmIFir7A8Qp0myBxWZxJzfPuYdl+7EKTbh03Vi0hwaEB4SbIIjPYGtYLiDGYbweVxPY9DvOvbHs415ZAfe23kxPD1wPKWK3FFWhgVmt/zVWi1sNzBJ9sn1/+23Z8zzkHkpTzRXouiLesc2ZIU9QwBL/Obn4YhWHgGrqhH3cg0KG3NqG2L2Dqr8An8PfvV9lrkd1b/SPsauuMPo9hLwMVjCF+7KOtZg5sr0V2nhnwORyZrKmiMvARvNvi07vXovyl02oCHLDqMxsm3Ck3W1RAhbZDXUOYlIE0ZmcMVBgrC41w9jpLfJCn6kp2/ktA+kmDQ7YV2sjGnh9cVvRapuTg2T+VwZUk4R5BHGCV76SVmUiS6zkMasRJPDsf0t8ML5JAaOPcKvCxgtzIlKnbpV6GGf9xHClL2RRGDiWYNWXxkANKd1Y81q2XibhTNRj7VeaDtHVdLu+ge0yMpFvSZR4b24vmeNP7j+Ra9g7WTidoGXqF2/yC8QEIfvLVjsVXWAN+JOSyasst4swdrJEDsUNZeaBw3SqRRiiveiaJoXUjYt2L9fGZgwIHRfQ0qdv5gk9oBMqef6ly9ilLcGLvkI=
   on:
-    distributions: sdist bdist_wheel
     repo: crichon/xdgmenu
     branch: test_packaging
